@@ -7,5 +7,11 @@
 import './stylesheets/index.scss'
 import React from 'react'
 import MainWrapper from './components/main-wrapper'
+import Instructor from './components/instructor'
+import mockInstructions from './components/instructor/mock-instructions'
 
 React.render(<MainWrapper />, document.body)
+
+window.inst = new Instructor(document.body, {
+  instructions: mockInstructions
+})

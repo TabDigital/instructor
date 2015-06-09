@@ -9,10 +9,10 @@ import React from 'react'
 export default class MainWrapper extends React.Component {
   render() {
     return <main className="main-wrapper">
-      <div className="box blue">
+      <div className="box blue" data-instructable="blue-box">
         A blue box
       </div>
-      <div className="box green">
+      <div className="box green" data-instructable="blue-box">
         A green box
       </div>
     </main>
