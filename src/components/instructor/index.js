@@ -92,14 +92,17 @@ export default class Instructor {
       this.rootEl.appendChild(this.overlayElement)
     }
     this.overlayElement.innerHTML = overlayTemplate(instructions)
-    this.overlayElement.classList.add('visible')
+    setTimeout(() => this.overlayElement.classList.add('visible'), 1)
     let wrapperEl = this.overlayElement.firstChild
     positionElementInRelation(wrapperEl, node, 'left')
   }
 
   removeOverlay() {
     if (this.overlayElement.parentNode) {
-      this.overlayElement.parentNode.removeChild(this.overlayElement)
+      this.overlayElement.classList.remove('visible')
+      setTimeout(() => {
+        this.overlayElement.parentNode.removeChild(this.overlayElement)
+      }, 350)
     }
   }
 }
