@@ -1,0 +1,32 @@
+// BRAND COLOURS
+// ==============
+//
+// 6 Base colours with the possibility of up to multiple shades from the base colour 
+// mean that designs should have a good range of colours that are easily swapped
+// without having to change all the colours.
+$base-colour-palette: (
+  'tab-green'       : rgb(0,132,66),
+  'tab-lime'        : rgb(195,207,33),
+  'tab-orange'      : rgb(241,87,33),
+  'tab-blue'        : rgb(189,211,218),
+  'tab-light-grey'  : rgb(232,232,232),
+  'tab-dark-grey'   : rgb(80,80,80)
+);
+
+$tint-percentage: 5%!default;
+
+// COLOUR SCALE MIXIN
+// ==================
+// 
+// Inspired by font-scales, a colour scale set the base colour at zero. Darker variations
+// are made using negative values, lighter with positive values. The scale size 
+// depends on the colour and the tint-percentage.
+
+@function colour($colour-name, $scale:0){
+  $colour-val: map-get($base-colour-palette, $colour-name);
+  @if $scale < 0 {
+    @return darken($colour-val, abs($scale) * $tint-percentage);
+  }@else{
+    @return lighten($colour-val, $scale * $tint-percentage);
+  }
+}

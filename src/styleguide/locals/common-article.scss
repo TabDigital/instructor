@@ -1,0 +1,83 @@
+// Styleguide common section
+// =========================
+
+.common-article {
+  margin: spacing(2) 0 0 columns(2);
+  padding-right: spacing(1);
+  max-width: columns(10);
+
+  &:first-of-type {
+    margin-top: columns(1);
+  }
+
+  >h1 {
+    @include heading-font(bold);
+    @include font-size(2);
+    color: $black;
+  }
+
+  >h2 {
+    @include heading-font(bold);
+    @include font-size(1);
+    padding-top: spacing(1);
+    margin-top: spacing(1);
+    color: $dark;
+    border-top: 1px dashed $dark;
+  }
+
+  >p {
+    @include font-size(0);
+    margin-top: spacing(1);
+    color: $dark;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  pre {
+    @include font-size(0);
+    margin: spacing(1) 0 0;
+    padding: spacing(1);
+  }
+
+  a {
+    font-weight: bold;
+    color: $green;
+  }
+
+  em {
+    font-weight: bold;
+    color: $black;
+  }
+
+  .common-table,
+  [data-common-table] {
+    max-width: columns(6);
+  }
+
+  .notification-error,
+  .notification-success,
+  .notification-warning {
+    margin-top: spacing(.5);
+  }
+
+
+  @include breakpoint(small) {
+    margin-left: spacing(1);
+
+    >p {
+      @include font-size(0, 'small');
+    }
+
+    h1 {
+      @include font-size(2, 'small');
+    }
+
+    pre {
+      @include font-size(-1, 'small');
+      margin: spacing(1, 'small') 0 0;
+      padding: spacing(.5, 'small');
+    }
+  }
+}

@@ -1,0 +1,26 @@
+// Hover
+// ==============
+//
+// NOTE: Disables hover for touch devices, requires .is-touch-device to be set on body
+
+@mixin hover {
+  $allSelector: #{&};
+  $selectors: ();
+  @while str-length($allSelector) > 0 {
+    $commaIndex: str-index($allSelector, ',');
+    @if $commaIndex and $commaIndex > 0 {
+      $selectors: append($selectors, str-slice($allSelector, 0, $commaIndex - 1), comma);
+      $allSelector: str-slice($allSelector, $commaIndex + 1);
+    } @else {
+      $selectors: append($selectors, $allSelector, comma);
+      $allSelector: '';
+    }
+  }
+
+  @each $sel in $selectors {
+    @at-root body:not(.is-touch-device) #{$sel}:hover {
+      @content;
+    }
+  }
+}
+

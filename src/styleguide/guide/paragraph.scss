@@ -1,0 +1,19 @@
+// Common paragraph settings
+// =========================
+//
+// Example:
+//
+// .component-name {
+//   p {
+//     @include .paragraph;
+//   }
+// }
+//
+// Note: it's important that the element that receives the mixin is not the
+// container, but the paragraph OR text element that will display the text.
+
+@mixin paragraph {
+  margin-top: $spacing;
+  line-height: 1.5;
+  color: $dark;
+}

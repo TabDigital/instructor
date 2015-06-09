@@ -1,0 +1,163 @@
+// Page header styles
+// ==================
+//
+// Example markup:
+//
+// <header class="page-header">
+//   <div class="content-wrapper">
+//     <span class="logo-and-title">
+//       <svg>…</svg>
+//       <span class="title">
+//         | Sports
+//       </span>
+//     </span>
+//     <div class="positioned-left">
+//       <a class="functional toggle-menu-link">
+//         <span class="hide-copy">Hide</span>
+//         Menu
+//       </a>
+//     </div>
+//     <div class="positioned-right">
+//       <a class="functional">Login</a> /
+//       <a class="functional">Join</a>
+//     </div>
+//   </div>
+// </header>
+
+$page-header-height: spacing(2.75);
+$page-header-height-sm: spacing(2);
+
+.page-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: $page-header-height;
+  z-index: 100;
+  background: $green;
+  color: $white;
+  border-bottom: 1px solid $white;
+
+  a {
+    color: $white;
+    text-decoration: none;
+  }
+
+  .content-wrapper {
+    width: 100%;
+    margin: 0 auto 0;
+    padding-left: $spacing;
+    padding-right: $spacing;
+    text-align: center;
+
+    a:active {
+      text-shadow: 0 0 15px currentColor;
+    }
+
+    &>* {
+      height: $page-header-height;
+      line-height: $page-header-height;
+
+      @include breakpoint(small) {
+        height: $page-header-height-sm;
+        line-height: $page-header-height-sm;
+      }
+    }
+
+    @include breakpoint(medium) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .logo-and-title {
+    display: inline-block;
+    white-space: nowrap;
+
+    .icon-tab,
+    .icon-tab-domain {
+      display: inline-block;
+      line-height: $page-header-height;
+      font-size: $page-header-height*.75;
+    }
+
+    .title {
+      font-weight: bold;
+      vertical-align: top;
+    }
+
+    @include breakpoint(small) {
+      transform: translate(-50%);
+
+      .icon-tab,
+      .icon-tab-domain {
+        line-height: $page-header-height-sm;
+        font-size: $page-header-height-sm*.75;
+      }
+
+      .title {
+        @include font-size(-1);
+        line-height: $page-header-height-sm;
+      }
+    }
+  }
+
+  .pipe-line {
+    font-weight: normal;
+    color: rgba($white, .5);
+    vertical-align: top;
+  }
+
+  &.javascript-disabled {
+    .logo-and-title {
+      transform: none;
+    }
+  }
+
+  .hide-copy {
+    transition: all .35s $bezier-curve;
+    display: inline-block;
+    max-width: 0;
+    margin-left: -4px;
+    opacity: .001;
+  }
+
+  .hidden .hide-copy {
+    max-width: 30px;
+    margin-left: 0;
+    opacity: .999;
+  }
+
+  .positioned-left,
+  .positioned-right {
+    top: 0;
+    position: absolute;
+  }
+
+  .positioned-left {
+    left: spacing(1);
+    @include breakpoint(small) {
+      left: 0;
+    }
+  }
+
+  .positioned-right {
+    right: spacing(1);
+    @include breakpoint(small) {
+      right: 0;
+    }
+  }
+
+  @include breakpoint(medium) {
+    padding: 0 spacing(.5);
+
+    .content-wrapper {
+      width: 100%;
+    }
+  }
+
+  @include breakpoint(small) {
+    min-height: $page-header-height-sm;
+    padding: 0 spacing(.5) 0 0;
+  }
+}

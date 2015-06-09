@@ -1,0 +1,49 @@
+// Colour palette
+// ==============
+//
+// NOTE: There is no such thing as colour consistency in the designs. Components
+// apparently can have their own variations and that's not by chance. So add
+// whatever here and we'll just have to hope for the best.
+
+$green: colour(tab-green, 0);
+$orange: colour(tab-orange, 0);
+$dark: colour(tab-dark-grey, 4);
+$white: white;
+$light: #f7f6f6;
+$black: black;
+//The 'red' used here is actually an orange. Changingd25 here for now until we have a different red
+$red: #eb361e;
+$blue: #218dc3;
+//$cyan color is for global footer twiiter icon only
+$cyan: #28B4F0;
+
+
+// Variations.
+$kinda-dark: colour(tab-dark-grey, 7);
+$really-dark: colour(tab-dark-grey, -1);
+$transparent-dark: rgba($dark, 0.4);
+$transparent-really-dark: rgba($black, 0.75);
+
+$form-label-black: #333;
+$textfield-focused-border-blue: #00bff3;
+$vic-blue: #0059d6;
+$notification-orange: $orange;
+$notification-yellow: #FFFFCC;
+
+// More variations, really.
+$dark-different: #323232;
+$orange-different: $orange;
+$blue-different: #228ebe;
+$green-different: #8cc53f;
+$dark-green: colour(tab-green, -3);
+$light-green: #dbeee4;
+$poo-yellow: #dfe59c;
+$dark-poo-yellow: darken(#dfe59c, 15%);
+$light-different: #dcdee0;
+$tepid-blue: #B7CFD4;
+
+//notification colors
+$notification-error-background: #fceae8;
+$notification-warning-background: #faccbb;
+$notification-success-background: #d8ece2;
+$notification-info-background: #ffffcc;

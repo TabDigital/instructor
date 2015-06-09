@@ -1,0 +1,66 @@
+// Flexible table
+// ==============
+//
+// As in the heading row, on small resolutions, becomes a left-hand positioned
+// column.
+
+$flexible-table-header-width: columns(1);
+$flexible-table-cell-width: columns(1);
+
+.flexible-table {
+  position: relative;
+  font-size: 0;
+
+  .flexible-row {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .flexible-cell {
+    @include font-size(-1);
+    padding: spacing(.125) spacing(.25);
+    display: table-cell;
+  }
+
+  @include breakpoint(small) {
+    white-space: nowrap;
+
+    .flexible-body-wrapper {
+      overflow: hidden;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .flexible-row {
+      display: inline-block;
+      width: $flexible-table-cell-width;
+      table-layout: auto;
+      white-space: normal;
+      vertical-align: top;
+    }
+
+    .flexible-header-wrapper {
+      float: left;
+      max-width: $flexible-table-header-width;
+
+      .flexible-cell {
+        display: block;
+      }
+    }
+
+    .body-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .flexible-cell {
+      @include font-size(-1, small);
+      display: inline-block;
+      width: 100%;
+      height: spacing(2, small);
+      overflow: hidden;
+      vertical-align: top;
+    }
+  }
+}

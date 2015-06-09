@@ -1,0 +1,10 @@
+node_modules
+public/bundle*
+public/index.css
+*.log
+.sass-cache
+.ruby-version
+*.swp
+*.sublime*
+.idea
+.nvmrc

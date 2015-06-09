@@ -1,0 +1,72 @@
+// Navigation group styles
+// =======================
+
+$navigation-group-border-thickness: 4px;
+
+// These get mixed in on hover.
+.link-hover-styles {
+  border: $navigation-group-border-thickness solid $green-different;
+  color: $dark-green;
+  background: $white;
+  text-decoration: none;
+}
+
+.navigation-group {
+  .navigation-section {
+    margin-top: spacing(1);
+  }
+
+  .navigation-section-heading {
+    font-size: font-scale(1);
+    line-height: spacing(1.5);
+    font-weight: bold;
+    color: $really-dark;
+    border-bottom: 1px solid $light-different;
+  }
+
+  .navigation-entries {
+    max-width: 100%;
+    font-size: 0;
+    margin-left: -(spacing(.25));
+
+    >a,
+    .separator-section > a {
+      display: inline-block;
+      min-width: columns(2);
+      max-width: columns(3);
+      padding: spacing(.5);
+      border: $navigation-group-border-thickness solid $light-different;
+      margin: spacing(.25) 0 0 spacing(.25);
+      vertical-align: top;
+      background: $white;
+      color: $dark;
+      opacity: 1;
+
+      >* {
+        @include font-size(0);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &:hover {
+        @extend .link-hover-styles;
+      }
+
+      @include breakpoint(small) {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  .separator-section {
+    margin-bottom: spacing(1.5);
+
+    > h1 {
+      @include font-size(1);
+      margin: spacing(.5) 0 0 spacing(.5);
+      color: $dark;
+    }
+  }
+}

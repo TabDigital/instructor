@@ -1,0 +1,34 @@
+// Has columns mixin
+// =================
+//
+// Apply this mixin to a columns wrapper. It assumes the immediate children
+// will act as columns.
+//
+// The example below makes columns-wrapper "$column*20" wide, with 3 columns,
+// and a gutter of size 1 $spacing:
+//
+// .columns-wrapper {
+//   @include has-columns($column*20, 3, $spacing);
+// }
+//
+// Passing a percentage as the width is also allowed.
+
+@mixin has-columns($wrapper-width, $columns-count, $gutter-size) {
+  width: $wrapper-width;
+  font-size: 0;
+
+  >* {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: $gutter-size;
+    @if str-index(#{$wrapper-width}, "%") {
+      width: calc(#{percentage(100/$columns-count) / 100} - (#{$gutter-size}/(#{$columns-count / ($columns-count - 1) })));
+    } @else {
+      width: calc(#{$wrapper-width / $columns-count} - (#{$gutter-size}/(#{$columns-count / ($columns-count - 1) })));
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

@@ -1,0 +1,70 @@
+// Tabbed section styles
+// =====================
+
+.tabbed-sections,
+[data-tabbed-sections] {
+  margin-top: spacing(1);
+
+  .tabs-nav {
+    font-size: 0;
+
+    a {
+      @include font-size(0);
+      transition: all .35s $bezier-curve;
+      display: inline-block;
+      line-height: spacing(2);
+      padding: 0 spacing(1);
+      background: $really-dark;
+      color: $light;
+      text-decoration: none;
+      font-weight: normal;
+      opacity: 1;
+      box-shadow: none;
+
+      &:hover,
+      &.active {
+        background: $green;
+        color: $white;
+      }
+
+      &.disabled {
+        display: none;
+      }
+    }
+  }
+
+  .tabs-section {
+    display: none;
+    padding: spacing(.5) spacing(1);
+    min-height: spacing(6);
+    border: 2px solid $green;
+    background: $white;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  // Local settings to be deleted if this is componentised.
+  @include breakpoint(small) {
+    .tabs-nav {
+      white-space: nowrap;
+
+      a {
+        width: 33.34%;
+        text-align: center;
+        padding: 0;
+      }
+    }
+
+    .tabs-section {
+      padding: spacing(.25);
+      min-height: spacing(2);
+    }
+
+    .no-data-message {
+      @include font-size(-1, small);
+      padding: spacing(.5);
+    }
+  }
+}

@@ -1,0 +1,33 @@
+// Responsive text module
+// ======================
+//
+// This shows/hides text based on the resolution. Relies on a certain markup
+// structure being abided by.
+//
+// Example:
+//
+// <div class="some-wrapper">
+//   <span
+//     class="text-span"
+//     data-default-text="Foo"
+//     data-small-text="Bar">
+//   </span>
+// </div>
+
+[data-default-text] {
+  &:before {
+    content: attr(data-default-text);
+    display: inline-block;
+    font-size: inherit;
+  }
+}
+
+[data-small-text] {
+  @include breakpoint(small) {
+    &:before {
+      content: attr(data-small-text);
+      display: inline-block;
+      font-size: inherit;
+    }
+  }
+}

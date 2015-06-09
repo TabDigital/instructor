@@ -1,0 +1,77 @@
+// Different button
+// ================
+
+$different-button-border-radius: .75ex;
+
+
+.different-button {
+  border: 1px solid colour(tab-light-grey, -4);
+  border-radius: $different-button-border-radius;
+  padding: spacing(.375) spacing(1);
+  background: colour(tab-light-grey, 1);
+  outline: none;
+
+  >i {
+    line-height: 0;
+  }
+
+  @include breakpoint(small) {
+    padding: spacing(.25, small) spacing(.5, small);
+  }
+
+  &:not(.inactive) {
+    @include hover {
+      background: colour(tab-light-grey, -1);
+    }
+
+    &.selected {
+      color: colour(tab-light-grey, 2);
+      background: colour(tab-green, 2);
+      text-decoration: none;
+
+      @include hover {
+        background: colour(tab-green, 1);
+      }
+    }
+  }
+}
+
+.different-button-grouped {
+  display: inline-block;
+
+  button {
+    border-radius: 0;
+  }
+
+  button:first-of-type {
+    border-top-left-radius: $different-button-border-radius;
+    border-bottom-left-radius: $different-button-border-radius;
+  }
+
+  button:last-of-type {
+    border-top-right-radius: $different-button-border-radius;
+    border-bottom-right-radius: $different-button-border-radius;
+  }
+
+  button + button {
+    margin-left: 0 !important;
+    border-left-width: 0;
+  }
+
+  &.compact {
+    @include breakpoint(small) {
+      button {
+        border-radius: $different-button-border-radius;
+      }
+
+      button.inactive + button {
+        border-left-width: .75px;
+      }
+
+      button.button-inactive {
+        display: none;
+      }
+    }
+  }
+}
+

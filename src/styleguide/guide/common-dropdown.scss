@@ -1,0 +1,74 @@
+// Common dropdown
+// ===============
+//
+// Example:
+//
+// <span class="common-dropdown">
+//   <select class="select-field">
+//     <option value="NSW">New South Wales</option>
+//     <option value="VIC">Victoria</option>
+//     <option value="QLD">Queensland</option>
+//   </select>
+//   <span class="value-span none-selected">
+//     none selected
+//   </span>
+//   <i class="arrow">▾</i>
+// </span>
+
+.crippled .common-dropdown {
+  &:after {
+    content: none;
+  }
+
+  select {
+    width: 100%;
+    padding-right: 0;
+  }
+}
+
+.common-dropdown {
+  @include font-size(0);
+  position: relative;
+  display: inline-block;
+  width: auto;
+  padding: 0;
+
+  &:after {
+    *display: none;
+    content: "\25BC";
+    transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: spacing(.25);
+    font-size: font-scale(0);
+    background: none;
+    color: inherit;
+    pointer-events: none;
+  }
+
+  & select, x:-moz-any-link, x:default {
+    /* A zero right padding is needed or the native arrow can show up. Downside is the text will run over the arrow */
+    padding-right: 0;
+    /* Window is a Firefox way of hiding the arrow, sometimes works */
+    -moz-appearance: window;
+  }
+
+
+  select {
+    display: inline-block;
+    height: 100%;
+    padding: 0 spacing(1) 0 spacing(.25);
+    font-size: inherit;
+    background: none;
+    appearance: none;
+    outline: none;
+    border: 0;
+  }
+
+  // Hide the native dropdown button arrow in IE 10/11+.
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+     select::-ms-expand {
+      display: none;
+    }
+  }
+}

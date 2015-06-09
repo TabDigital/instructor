@@ -1,0 +1,190 @@
+// Modal
+// =====================
+
+// Helper class to be attached to the <body>, to prevent scrolling when the
+// modal is opened.
+.modal-open {
+  overflow: hidden;
+}
+
+// Cripped browsers.
+.crippled .common-modal {
+  text-align: center;
+
+  &.active {
+    .modal-window {
+      transform: none;
+      left: auto;
+    }
+  }
+
+  .modal-window {
+    position: relative;
+    margin: 15vh auto 0;
+    max-width: 50%;
+    left: auto;
+    top: auto;
+    height: auto;
+    display: inline-block;
+  }
+
+  @include breakpoint(medium){
+    .modal-window {
+
+      max-width: 95%;
+
+      .modal-body {
+        max-height: 80%;
+      }
+    }
+
+    &.active {
+      .modal-window {
+        transform: none;
+      }
+    }
+  }
+}
+
+.common-modal {
+  transition: opacity .35s $bezier-curve;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  background: $transparent-really-dark;
+  z-index: 20;
+
+  &.active {
+    pointer-events: auto;
+    visibility: visible;
+    opacity: 1;
+    -webkit-overflow-scrolling: touch;
+
+    .modal-window {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .modal-window {
+    transition: all .35s $bezier-curve;
+    transform: translate(-50%, -50%) scale(.85);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    max-width: 100%;
+    min-width: 50%;
+    background: $white;
+    opacity: 0;
+  }
+
+  .modal-title {
+    position: relative;
+    @include font-size(2);
+    text-align: center;
+    background: $green;
+    color: $white;
+  }
+
+  .modal-body {
+    max-height: 50vh;
+    padding: spacing(1) spacing(1) 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: $white;
+
+    >p {
+      @include paragraph;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .buttons-row {
+    margin-top: spacing(.5);
+    padding-bottom: spacing(.5);
+    text-align: center;
+    background: white;
+    z-index: 1;
+
+    button {
+      min-width: columns(2);
+      margin: 0 spacing(1);
+    }
+  }
+
+  .close-button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    right: spacing(.5);
+    width: spacing(1.5);
+    height: spacing(1.5);
+    border-radius: spacing(1);
+    color: $white;
+    text-align:center;
+    background: $really-dark;
+    z-index: 1;
+    &::before {
+      font-size: font-scale(0);
+      content: '\2715';
+      position: absolute;
+      top: spacing(.25);
+      left: spacing(.5);
+    }
+  }
+
+  @include breakpoint(small) {
+    .modal-window {
+      transform: translate(0, 0) scale(.85);
+      top: spacing(3, small);
+      right: spacing(1, small);
+      bottom: spacing(2, small);
+      left: spacing(1, small);
+      height: auto;
+    }
+
+    .modal-body {
+      top: spacing(2, small);
+      bottom: 0;
+      max-height: none;
+    }
+
+    .modal-title,
+    .modal-body,
+    .buttons-row {
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+
+    .modal-title {
+      @include font-size(2, small);
+      line-height: spacing(2, small);
+      top: 0;
+    }
+
+    .buttons-row {
+      bottom: 0;
+
+      button {
+        min-width: columns(1, small);
+        margin: 0 spacing(1, small);
+      }
+    }
+
+    &.active {
+      .modal-window {
+        transform: translate(0, 0) scale(1);
+      }
+    }
+  }
+}

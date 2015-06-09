@@ -1,0 +1,174 @@
+// Tooltips
+// ========
+//
+// Tooltips are made 100% in CSS. For that, you need to invoke the mixin on
+// the element that'll display the tooltip, and add a bit of markup with the
+// tooltip copy in it.
+//
+// Example:
+//
+// .button-name {
+//   @extend .common-button;
+//   @include has-tooltip(right);
+// }
+//
+// And then:
+//
+// <button class="button-name">
+//   Button with a tooltip
+//   <span class="tooltip">
+//     My tooltip
+//   </span>
+// </button>
+
+$tooltip-pointer-bg-size: 10px;
+$tooltip-pointer-size: 9px;
+
+.tooltip {
+  @extend .common-drop-shadow;
+  @include font-size(-1);
+  transition: all .15s linear;
+  transform-origin: top;
+  display: inline-block;
+  padding: spacing(.25);
+  border: 1px solid $dark;
+  opacity: .001;
+  pointer-events: none;
+  white-space: nowrap;
+  background: $white;
+  text-decoration: none;
+  font-weight: normal !important;
+  color: $black;
+  z-index: 2;
+}
+
+@mixin has-tooltip($direction: top) {
+  position: relative;
+
+  .tooltip {
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+
+    @if $direction == top {
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -150%) rotateX(-90deg);
+    } @else if $direction == right {
+      right: 0;
+      top: 50%;
+      transform: translate(110%, 0%) rotateX(-90deg);
+    } @else if $direction == left {
+      left: 0;
+      top: 50%;
+      transform: translate(-50%, 0%) rotateX(-90deg);
+    } @else if $direction == bottom {
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 175%) rotateX(-90deg);
+    }
+  }
+
+  &:hover,
+  &.tooltip-lock {
+    .tooltip {
+      opacity: .999;
+
+      &:after,
+      &:before {
+        content: "";
+        color: transparent;
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        border-style: solid;
+      }
+
+      &:after {
+        margin: 0;
+        border-width: $tooltip-pointer-size;
+      }
+
+      &:before {
+        margin: 0;
+        border-width: $tooltip-pointer-bg-size;
+      }
+
+      @if $direction == top {
+        transform: translate(-50%, -100%);
+        &:after,
+        &:before {
+          top: 100%;
+          left: 50%;
+        }
+
+        &:after {
+          margin-left: -$tooltip-pointer-size;
+          border-color: $white transparent transparent transparent;
+        }
+
+        &:before {
+          margin-left: -$tooltip-pointer-bg-size;
+          border-color: $dark transparent transparent transparent;
+        }
+      } @else if $direction == right {
+        transform: translate(110%, -50%);
+        &:after,
+        &:before {
+          top: 50%;
+          right: 100%;
+        }
+
+        &:after {
+          margin-top: -$tooltip-pointer-size;
+          border-color: transparent $white transparent transparent;
+        }
+
+        &:before {
+          margin-top: -$tooltip-pointer-bg-size;
+          border-color: transparent $dark transparent transparent;
+        }
+      } @else if $direction == left {
+        transform: translate(-100%, -50%);
+        &:after,
+        &:before {
+          top: 50%;
+          left: 100%;
+        }
+
+        &:after {
+          margin-top: -$tooltip-pointer-size;
+          border-color: transparent transparent transparent $white;
+        }
+
+        &:before {
+          margin-top: -$tooltip-pointer-bg-size;
+          border-color: transparent transparent transparent $dark;
+        }
+      } @else if $direction == bottom {
+        transform: translate(-50%, 125%);
+        &:after,
+        &:before {
+          bottom: 100%;
+          left: 50%;
+        }
+
+        &:after {
+          margin-left: -$tooltip-pointer-size;
+          border-color: transparent transparent $white transparent;
+        }
+
+        &:before {
+          margin-left: -$tooltip-pointer-bg-size;
+          border-color: transparent transparent $dark transparent;
+        }
+      }
+    }
+  }
+}
