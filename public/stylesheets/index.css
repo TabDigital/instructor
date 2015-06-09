@@ -1746,4 +1746,6 @@ a {
     .different-button-grouped.compact button.button-inactive {
       display: none; } }
 
-/* No files to import found in ../components/**\/* */
+.main-wrapper {
+  width: 336px;
+  margin: 84px auto 0; }
