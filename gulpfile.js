@@ -28,10 +28,7 @@ gulp.task('babel', function () {
 var sass = require('gulp-ruby-sass');
 
 gulp.task('sass', function() {
-  return sass(
-      Config.srcDir + '/stylesheets/index.scss',
-      { require: 'sass-globbing' }
-    )
+  return sass(Config.srcDir + '/stylesheets/index.scss')
     .pipe(gulp.dest(Config.publicDir + '/stylesheets/'))
 });
 // ---

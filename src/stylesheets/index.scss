@@ -7,7 +7,6 @@
 // To automate @import’ing component styles, we use sass-globbing.
 
 // Dependencies
-@import "../styleguide/guide/all";
-
-// Components
-@import "../components/**/*";
+@import "src/styleguide/guide/all";
+@import "src/components/main-wrapper/index";
+@import "src/components/instructor/index";
