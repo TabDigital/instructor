@@ -50,6 +50,7 @@ export default class Instructor {
     this.rootEl = rootEl
     this.instructables = this.findAllInstructables()
     this.instructions = options.instructions
+    this.index = 0
     this._makeOverlayElement()
   }
 
@@ -78,9 +79,14 @@ export default class Instructor {
     return [].slice.apply(this.rootEl.querySelectorAll(selector))
   }
 
-  showFirstInstructable() {
-    let node = this.instructables[0]
+  showNextInstructable() {
+    let node = this.instructables[this.index]
     if (node) this.show(node)
+    if (this.index >= this.instructables.length - 1) {
+      this.index = 0
+    } else {
+      this.index++
+    }
   }
 
   show(node) {

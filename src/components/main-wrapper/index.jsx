@@ -12,7 +12,7 @@ export default class MainWrapper extends React.Component {
       <div className="box blue" data-instructable="blue-box">
         A blue box
       </div>
-      <div className="box green" data-instructable="blue-box">
+      <div className="box green" data-instructable="green-box">
         A green box
       </div>
     </main>

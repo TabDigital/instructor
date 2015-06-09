@@ -9,7 +9,7 @@ export default {
     body: 'An ok green box'
   },
   'blue-box': {
-    title: 'Look, a blue box',
-    body: 'A very, very nice blue box'
+    title: 'And here is another box',
+    body: 'Almost very different than the previous one'
   }
 }
