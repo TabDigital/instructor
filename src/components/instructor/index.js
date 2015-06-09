@@ -11,12 +11,13 @@ const overlayTemplate = function(attributes = {}) {
     <div class="instructable-wrapper">
       <h1 class="heading">${attributes.title}</h1>
       <div class="body-wrapper">${attributes.body}</div>
+      <menu class="menu">
+        <button class="common-button more-button">More helpers</button>
+        <button class="common-button exit-button">Exit</button>
+      </menu>
     </div>
   `.trim()
 }
-
-const overlayElement = document.createElement('div')
-overlayElement.classList.add('instructable-overlay')
 
 const directionClassNames = ['top', 'right', 'bottom', 'left']
 
@@ -49,6 +50,28 @@ export default class Instructor {
     this.rootEl = rootEl
     this.instructables = this.findAllInstructables()
     this.instructions = options.instructions
+    this._makeOverlayElement()
+  }
+
+  _makeOverlayElement() {
+    this.overlayElement = document.createElement('div')
+    this.overlayElement.classList.add('instructable-overlay')
+    this.overlayElement.addEventListener(
+      'click', this._clickedOverlay.bind(this)
+    )
+  }
+
+  _clickedOverlay(event) {
+    event.stopPropagation()
+    if (
+      event.target.classList &&
+      (
+        event.target.classList.contains('instructable-overlay') ||
+        event.target.classList.contains('exit-button')
+      )
+    ) {
+      this.removeOverlay()
+    }
   }
 
   findAllInstructables() {
@@ -65,16 +88,18 @@ export default class Instructor {
     if (!instructions) {
       throw new Error(`Instructor: No instructions found for ${node.classList}`)
     }
-    if (!overlayElement.parentNode) this.rootEl.appendChild(overlayElement)
-    overlayElement.innerHTML = overlayTemplate(instructions)
-    overlayElement.classList.add('visible')
-    let wrapperEl = overlayElement.firstChild
+    if (!this.overlayElement.parentNode) {
+      this.rootEl.appendChild(this.overlayElement)
+    }
+    this.overlayElement.innerHTML = overlayTemplate(instructions)
+    this.overlayElement.classList.add('visible')
+    let wrapperEl = this.overlayElement.firstChild
     positionElementInRelation(wrapperEl, node, 'left')
   }
 
   removeOverlay() {
-    if (overlayElement.parentNode) {
-      overlayElement.parentNode.removeChild(overlayElement)
+    if (this.overlayElement.parentNode) {
+      this.overlayElement.parentNode.removeChild(this.overlayElement)
     }
   }
 }

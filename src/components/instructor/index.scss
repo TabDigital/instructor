@@ -27,18 +27,30 @@
 
     &.top {
       transform: translate3d(0, calc(-100% - #{spacing(1)}), 0);
+      text-align: center;
     }
 
     &.right {
       transform: translate3d(calc(100% + #{spacing(1)}), 0, 0);
+      text-align: left;
     }
 
     &.bottom {
       transform: translate3d(calc(0, 100% + #{spacing(1)}), 0);
+      text-align: center;
     }
 
     &.left {
       transform: translate3d(calc(-100% - #{spacing(1)}), 0, 0);
+      text-align: right;
+    }
+
+    *:not(:first-child) {
+      margin-top: spacing(.5);
+    }
+
+    button + button {
+      margin-left: spacing(.5);
     }
   }
 
