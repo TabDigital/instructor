@@ -1,6 +1,6 @@
 node_modules
 public/bundle*
-public/index.css
+public/stylesheets
 *.log
 .sass-cache
 .ruby-version
