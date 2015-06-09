@@ -18,6 +18,27 @@ const overlayTemplate = function(attributes = {}) {
 const overlayElement = document.createElement('div')
 overlayElement.classList.add('instructable-overlay')
 
+function positionElementInRelation(element, relatedElement, direction) {
+  switch (direction) {
+    case 'top':
+      element.style.top = relatedElement.offsetTop
+      element.style.left = relatedElement.offsetLeft
+      break;
+    case 'right':
+      element.style.top = relatedElement.offsetTop
+      element.style.left = relatedElement.offsetLeft
+      break;
+    case 'bottom':
+      element.style.top = relatedElement.offsetTop
+      element.style.left = relatedElement.offsetLeft
+      break;
+    case 'left':
+      element.style.top = relatedElement.offsetTop
+      element.style.left = relatedElement.offsetLeft
+      break;
+  }
+}
+
 export default class Instructor {
   constructor(rootEl, options = {}) {
     this.rootEl = rootEl
@@ -30,8 +51,8 @@ export default class Instructor {
     return [].slice.apply(elements)
   }
 
-  show(key) {
-    let instructions = this.instructions[key]
+  show(node) {
+    let instructions = this.instructions[node.datalist.instructable]
     if (!instructions) {
       throw new Error(`Instructor: No instructions found for ${key}`)
     }

@@ -7,13 +7,23 @@
 .instructable-overlay {
   transition: all .35s ease-out;
   position: fixed;
-  background: rgba(black, .5);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(black, .85);
   visibility: hidden;
   opacity: .001;
+  color: white;
+  overflow: hidden;
 
   &.visible {
     visibility: visible;
     opacity: .999;
+  }
+
+  .instructable-wrapper {
+    position: absolute;
   }
 
   .heading {
