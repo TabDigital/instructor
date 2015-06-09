@@ -1,0 +1,26 @@
+// Instructor styles
+// =================
+//
+// The styles in here depend on the styleguide grid functions, such as
+// spacing() and the font-size mixin.
+
+.instructable-overlay {
+  transition: all .35s ease-out;
+  position: fixed;
+  background: rgba(black, .5);
+  visibility: hidden;
+  opacity: .001;
+
+  &.visible {
+    visibility: visible;
+    opacity: .999;
+  }
+
+  .heading {
+    @include font-size(3);
+  }
+
+  .body-wrapper {
+    @include font-size(1);
+  }
+}
