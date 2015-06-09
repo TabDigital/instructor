@@ -1,24 +1,74 @@
 {
+  "dependencies": {
+    "airwaves": "^0.3.0",
+    "async": "^0.9.0",
+    "classnames": "^2.1.1",
+    "flux": "^2.0.1",
+    "immutable": "^3.7.2",
+    "lodash": "^3.7.0",
+    "moment": "^2.10.2",
+    "react": "0.13.2",
+    "react-mixin": "^1.2.2",
+    "react-router": "^0.13.2",
+    "react-tools": "0.13.2",
+    "superagent": "^1.2.0",
+    "wolfy87-eventemitter": "^4.2.11"
+  },
   "scripts": {
+    "test": "jest",
     "build": "gulp build"
   },
+  "jest": {
+    "scriptPreprocessor": "node_modules/babel-jest",
+    "testDirectoryName": "tests",
+    "setupEnvScriptFile": "tests/setup.js",
+    "modulePathIgnorePatterns": [
+      "node_modules",
+      "tests/mocks"
+    ],
+    "unmockedModulePathPatterns": [
+      "node_modules/react",
+      "node_modules/rosie",
+      "node_modules/moment",
+      "node_modules/superagent",
+      "src/components",
+      "tests/mocks",
+      "object-assign"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx"
+    ],
+    "testFileExtensions": [
+      "js"
+    ]
+  },
   "devDependencies": {
-    "babel": "^5.5.5",
-    "babel-core": "^5.5.5",
-    "babel-eslint": "^3.1.14",
+    "autoprefixer-loader": "^1.2.0",
+    "babel": "^5.3.0",
+    "babel-core": "^5.3.0",
+    "babel-eslint": "^3.1.1",
+    "babel-jest": "^5.2.0",
+    "babel-loader": "^5.0.0",
     "babel-runtime": "^5.3.0",
-    "connect": "^3.3.5",
+    "compression-webpack-plugin": "^0.2.0",
+    "css-loader": "^0.10.1",
     "eslint": "^0.19.0",
-    "finalhandler": "^0.3.6",
-    "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^2.3.1",
-    "gulp-babel": "^5.1.0",
-    "gulp-concat": "^2.5.2",
+    "eslint-plugin-react": "^2.2.0",
+    "gulp": "^3.8.11",
     "gulp-eslint": "^0.9.0",
-    "gulp-ruby-sass": "^1.0.5",
-    "gulp-sourcemaps": "^1.5.2",
+    "gulp-jest": "^0.4.0",
     "gulp-util": "^3.0.4",
+    "jest-cli": "^0.4.0",
     "json-loader": "^0.5.1",
-    "serve-static": "^1.9.3"
+    "jsx-loader": "^0.13.1",
+    "object-assign": "^2.0.0",
+    "react-hot-loader": "^1.2.5",
+    "rosie": "TabDigital/rosie#info-display-es6",
+    "ruby-sass-loader": "^0.2.0",
+    "style-loader": "^0.10.1",
+    "webpack": "^1.8.4",
+    "webpack-dev-server": "^1.8.0"
   }
 }
