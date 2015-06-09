@@ -1,7 +1,7 @@
 // Instructor
 // ==========
 
-export default function Instructor(rootEl, options = {}) {
-
-
+export default class Instructor() {
+  constructor(rootEl, options = {}) {
+  }
 }
