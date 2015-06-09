@@ -18,24 +18,29 @@ const overlayTemplate = function(attributes = {}) {
 const overlayElement = document.createElement('div')
 overlayElement.classList.add('instructable-overlay')
 
+const directionClassNames = ['top', 'right', 'bottom', 'left']
+
 function positionElementInRelation(element, relatedElement, direction) {
+  element.classList.remove(...directionClassNames)
+  element.classList.add(direction)
+
   switch (direction) {
     case 'top':
       element.style.top = relatedElement.offsetTop
       element.style.left = relatedElement.offsetLeft
-      break;
+      break
     case 'right':
       element.style.top = relatedElement.offsetTop
       element.style.left = relatedElement.offsetLeft
-      break;
+      break
     case 'bottom':
       element.style.top = relatedElement.offsetTop
       element.style.left = relatedElement.offsetLeft
-      break;
+      break
     case 'left':
       element.style.top = relatedElement.offsetTop
       element.style.left = relatedElement.offsetLeft
-      break;
+      break
   }
 }
 
@@ -47,18 +52,24 @@ export default class Instructor {
   }
 
   findAllInstructables() {
-    let elements = this.rootEl.querySelectorAll(selector)
-    return [].slice.apply(elements)
+    return [].slice.apply(this.rootEl.querySelectorAll(selector))
+  }
+
+  showFirstInstructable() {
+    let node = this.instructables[0]
+    if (node) this.show(node)
   }
 
   show(node) {
-    let instructions = this.instructions[node.datalist.instructable]
+    let instructions = this.instructions[node.dataset.instructable]
     if (!instructions) {
-      throw new Error(`Instructor: No instructions found for ${key}`)
+      throw new Error(`Instructor: No instructions found for ${node.classList}`)
     }
     if (!overlayElement.parentNode) this.rootEl.appendChild(overlayElement)
     overlayElement.innerHTML = overlayTemplate(instructions)
     overlayElement.classList.add('visible')
+    let wrapperEl = overlayElement.firstChild
+    positionElementInRelation(wrapperEl, node, 'left')
   }
 
   removeOverlay() {

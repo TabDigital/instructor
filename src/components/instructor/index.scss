@@ -24,6 +24,22 @@
 
   .instructable-wrapper {
     position: absolute;
+
+    &.top {
+      transform: translate3d(0, calc(-100% - #{spacing(1)}), 0);
+    }
+
+    &.right {
+      transform: translate3d(calc(100% + #{spacing(1)}), 0, 0);
+    }
+
+    &.bottom {
+      transform: translate3d(calc(0, 100% + #{spacing(1)}), 0);
+    }
+
+    &.left {
+      transform: translate3d(calc(-100% - #{spacing(1)}), 0, 0);
+    }
   }
 
   .heading {
