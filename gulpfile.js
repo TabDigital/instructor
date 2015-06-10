@@ -51,6 +51,9 @@ gulp.task('webpack:build', function(callback) {
     webpackConfig.debug = false;
     webpackConfig.profile = false;
     webpackConfig.output.pathInfo = false;
+    webpackConfig.entry = ['./src/components/instructor/index'];
+    webpackConfig.output.path = './dist/';
+    webpackConfig.output.filename = 'instructor.js';
     webpackConfig.plugins.push(
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
