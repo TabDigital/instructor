@@ -12,6 +12,10 @@ import mockInstructions from './components/instructor/mock-instructions'
 
 React.render(<MainWrapper />, document.body)
 
-window.inst = new Instructor(document.body, {
+let instructor = new Instructor(document.body, {
   instructions: mockInstructions
 })
+
+setTimeout(() => {
+  instructor.showNextInstructable()
+}, 1500)
