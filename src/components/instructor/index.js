@@ -1,6 +1,8 @@
 // Instructor
 // ==========
 
+import fitElement from './fit-element'
+
 // The selector that elements need to carry in order to get the overlay. The
 // value should be a unique key for the instructions object. See
 // ./mock-instructions.js.
@@ -34,32 +36,6 @@ const overlayTemplate = function(attributes = {}) {
       </menu>
     </div>
   `.trim()
-}
-
-const directionClassNames = ['top', 'right', 'bottom', 'left']
-
-function positionElementInRelation(element, relatedElement, direction) {
-  element.classList.remove(...directionClassNames)
-  element.classList.add(direction)
-
-  switch (direction) {
-    case 'top':
-      element.style.top = relatedElement.offsetTop
-      element.style.left = relatedElement.offsetLeft
-      break
-    case 'right':
-      element.style.top = relatedElement.offsetTop
-      element.style.left = relatedElement.offsetLeft
-      break
-    case 'bottom':
-      element.style.top = relatedElement.offsetTop
-      element.style.left = relatedElement.offsetLeft
-      break
-    case 'left':
-      element.style.top = relatedElement.offsetTop
-      element.style.left = relatedElement.offsetLeft
-      break
-  }
 }
 
 export default class Instructor {
@@ -120,7 +96,7 @@ export default class Instructor {
     this.overlayElement.innerHTML = overlayTemplate(attributes)
     setTimeout(() => this.overlayElement.classList.add('visible'), 1)
     let wrapperEl = this.overlayElement.querySelector('.instructable-wrapper')
-    positionElementInRelation(wrapperEl, node, 'left')
+    fitElement(wrapperEl, node, 'left')
   }
 
   removeOverlay() {
