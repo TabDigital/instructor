@@ -36,19 +36,22 @@
   .instructable-wrapper {
     position: absolute;
 
-    &.top {
-      transform: translate3d(0, calc(-100% - #{spacing(1)}), 0);
+    &.top,
+    &.bottom {
       text-align: center;
     }
 
+    &.top {
+      transform: translate3d(0, calc(-100% - #{spacing(1)}), 0);
+    }
+
     &.right {
-      transform: translate3d(calc(100% + #{spacing(1)}), 0, 0);
+      transform: translate3d(spacing(1), 0, 0);
       text-align: left;
     }
 
     &.bottom {
-      transform: translate3d(calc(0, 100% + #{spacing(1)}), 0);
-      text-align: center;
+      transform: translate3d(0, spacing(1), 0);
     }
 
     &.left {
