@@ -53,6 +53,7 @@ export default class Instructor {
     this.overlayElement.addEventListener(
       'click', this._clickedOverlay.bind(this)
     )
+    window.addEventListener('resize', this.removeOverlay.bind(this), false)
   }
 
   _clickedOverlay(event) {
@@ -100,6 +101,7 @@ export default class Instructor {
   }
 
   removeOverlay() {
+    if (!this.overlayElement.classList.contains('visible')) return false
     if (this.overlayElement.parentNode) {
       this.overlayElement.classList.remove('visible')
       setTimeout(() => {
