@@ -2,7 +2,7 @@
 
 It shows overlays on things on the page and pulls an explanation for them.
 
-## Instructions (hah)
+### Usage
 
 Instance a new instructor. Pass a root node and an instructions object (see
   `mock-instructions.js`) to it.
