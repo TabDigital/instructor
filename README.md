@@ -18,3 +18,11 @@ The `showNextInstructable` method will show the next (or first if none has
   necessary `data-instructable` attribute. The value for the attribute should
   be the unique key used to find the corresponding instruction in the
   instructions object.
+
+Like so:
+
+    <div class="some-form" data-instructable="some-form">
+      …
+    </div>
+
+Where `some-form` maps to a key in the instructions object.
