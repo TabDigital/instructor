@@ -9,17 +9,21 @@ const selector = '[data-instructable]'
 const overlayTemplate = function(attributes = {}) {
   return `
     <svg class="background-image">
-      <mask id="mask">
+      <mask id="overlay-mask">
           <rect fill="white" width="100%" height="100%"/>
           <rect
-            cx="100"
-            cy="100"
-            stroke="black"
-            stroke-width="2"
+            y="${attributes.top}"
+            x="${attributes.left}"
+            height="${attributes.height}"
+            width="${attributes.width}"
             fill="black"
           />
       </mask>
-      <rect mask="url(#mask)" fill="rgba(0, 0, 0, .85)" width="100%" height="100%"/>
+      <rect mask="url(#overlay-mask)"
+      width="100%"
+      height="100%"
+      class="overlay-mask"
+      />
     </svg>
     <div class="instructable-wrapper">
       <h1 class="heading">${attributes.title}</h1>
@@ -79,11 +83,10 @@ export default class Instructor {
     event.stopPropagation()
     if (
       event.target.classList &&
-      (
-        event.target.classList.contains('instructable-overlay') ||
-        event.target.classList.contains('exit-button')
-      )
+      event.target.classList.contains('more-button')
     ) {
+      this.showNextInstructable()
+    } else {
       this.removeOverlay()
     }
   }
@@ -103,14 +106,18 @@ export default class Instructor {
   }
 
   show(node) {
-    let instructions = this.instructions[node.dataset.instructable]
-    if (!instructions) {
+    let attributes = this.instructions[node.dataset.instructable]
+    if (!attributes) {
       throw new Error(`Instructor: No instructions found for ${node.classList}`)
     }
     if (!this.overlayElement.parentNode) {
       this.rootEl.appendChild(this.overlayElement)
     }
-    this.overlayElement.innerHTML = overlayTemplate(instructions)
+    attributes.top = node.offsetTop
+    attributes.left = node.offsetLeft
+    attributes.width = node.offsetWidth
+    attributes.height = node.offsetHeight
+    this.overlayElement.innerHTML = overlayTemplate(attributes)
     setTimeout(() => this.overlayElement.classList.add('visible'), 1)
     let wrapperEl = this.overlayElement.querySelector('.instructable-wrapper')
     positionElementInRelation(wrapperEl, node, 'left')
