@@ -98,6 +98,7 @@
   color: inherit;
   outline: none;
   cursor: pointer;
+  font-family: inherit;
 }
 
 .instructable-overlay .instructable-wrapper button:hover {
