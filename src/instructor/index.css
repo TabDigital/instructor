@@ -47,7 +47,7 @@
 }
 
 .instructable-overlay .instructable-wrapper.top {
-  transform: translate3d(0, calc(-100% - 22px), 0);
+  transform: translate3d(-50%, calc(-100% - 22px), 0);
 }
 
 .instructable-overlay .instructable-wrapper.right {
@@ -56,7 +56,7 @@
 }
 
 .instructable-overlay .instructable-wrapper.bottom {
-  transform: translate3d(0, 22px, 0);
+  transform: translate3d(-50%, 22px, 0);
 }
 
 .instructable-overlay .instructable-wrapper.left {
@@ -64,7 +64,7 @@
   text-align: right;
 }
 
-.instructable-overlay .instructable-wrapper *:not(:first-child) {
+.instructable-overlay .instructable-wrapper>*:not(:first-child) {
   margin-top: 11px;
 }
 
@@ -73,8 +73,14 @@
 }
 
 .instructable-overlay .instructable-wrapper .heading {
+  margin: 0;
   font-size: 23px;
   line-height: 44px;
+}
+
+.instructable-overlay .instructable-wrapper .menu {
+  margin: 11px;
+  padding: 0;
 }
 
 .instructable-overlay .instructable-wrapper .body-wrapper {
