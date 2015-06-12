@@ -4,6 +4,7 @@
 .main-wrapper {
   width: 666px;
   margin: 99px auto 0;
+  font-family: sans-serif;
 }
 
 .main-wrapper .box {
