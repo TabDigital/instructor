@@ -1,5 +1,5 @@
 node_modules
-public/index.js
-public/index.css
+public/*.js
+public/*.css
 public/*.map
 *.log
