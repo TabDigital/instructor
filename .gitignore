@@ -1,10 +1,5 @@
 node_modules
-public/bundle*
-public/stylesheets
+public/index.js
+public/index.css
+public/*.map
 *.log
-.sass-cache
-.ruby-version
-*.swp
-*.sublime*
-.idea
-.nvmrc
