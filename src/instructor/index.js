@@ -31,8 +31,8 @@ const overlayTemplate = function(attributes = {}) {
       <h1 class="heading">${attributes.title}</h1>
       <div class="body-wrapper">${attributes.body}</div>
       <menu class="menu">
-        <button class="common-button more-button">More helpers</button>
-        <button class="common-button exit-button">Exit</button>
+        <button class="more-button">More helpers</button>
+        <button class="exit-button">Exit</button>
       </menu>
     </div>
   `.trim()
