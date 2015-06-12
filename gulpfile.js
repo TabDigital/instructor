@@ -1,146 +1,68 @@
-// Build tasks
-// ===========
+// All build tasks
+// ===============
 
-var gulp  = require('gulp');
-var utils = require('gulp-util');
-
-// Testing
-var jest  = require('gulp-jest');
-var packageJson = Object.create(require('./package.json'));
-
-gulp.task('jest', function() {
-  return gulp.src(".")
-    .pipe(jest(packageJson.jest));
-});
+var gulp = require('gulp');
 
 // Build configurations.
-var path = require('path');
-
 var Config = {
-  srcDir:         path.resolve('./src'),
-  publicDir:      path.resolve('./public')
+  port:       '4567',
+  srcDir:     './src',
+  publicDir:  './public'
 };
 
-// Environment detection
-var currentEnv = process.env.NODE_ENV === 'production' ?
-  'production' : 'development';
-utils.log(
-  'Environment:', utils.colors.blue(currentEnv)
-);
+// YavaScripts.
+var sourcemaps = require('gulp-sourcemaps');
+var babel = require('gulp-babel');
+var concat = require('gulp-concat');
 
-// Webpack build
-var webpack           = require('webpack');
-var webpackConfig     = Object.create(require('./webpack.config.js'));
-var CompressionPlugin = require('compression-webpack-plugin');
-
-webpackConfig.plugins.push(
-  new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: JSON.stringify(currentEnv)
-    }
-  })
-);
-
-gulp.task('webpack:build', function(callback) {
-  webpackConfig.output.path = Config.publicDir;
-  webpackConfig.devtool = '#source-map';
-  webpackConfig.progress = true;
-
-  if (currentEnv === 'production') {
-    webpackConfig.bail = true;
-    webpackConfig.debug = false;
-    webpackConfig.profile = false;
-    webpackConfig.output.pathInfo = false;
-    webpackConfig.entry = ['./src/components/instructor/index'];
-    webpackConfig.output.path = './dist/';
-    webpackConfig.output.filename = 'instructor.js';
-    webpackConfig.plugins.push(
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-        mangle: { except: ['require', 'export', 'import', '$super'] },
-        compress: {
-          sequences: true,
-          dead_code: true,
-          conditionals: true,
-          booleans: true,
-          unused: true,
-          if_return: true,
-          join_vars: true,
-          drop_console: true,
-          warnings: false
-        }
-      }),
-      new CompressionPlugin({
-        asset: "{file}.gz",
-        algorithm: "gzip",
-        threshold: 10240,
-        minRatio: 0.8
-      })
-    );
-  }
-
-  webpack(webpackConfig, function(err, stats) {
-    if (err) throw new utils.PluginError('webpack:build', err);
-
-    utils.log('Webpack', stats.toString({
-      colors: true,
-      chunks: false
-    }));
-
-    callback();
-  });
+gulp.task('babel', function () {
+  return gulp.src('src/boot.js')
+    .pipe(sourcemaps.init())
+    .pipe(babel())
+    .pipe(concat('bundle.js'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(Config.publicDir));
 });
 
-// Webpack server
-var WebpackDevServer  = require('webpack-dev-server');
+// SASS.
+var sass = require('gulp-ruby-sass');
 
-gulp.task('webpack:serve', function() {
-  var hostname = 'localhost';
-  var port = 4567;
-  var compiler = webpack(webpackConfig);
+gulp.task('sass', function() {
+  return sass(Config.srcDir + '/stylesheets/index.scss')
+    .pipe(gulp.dest(Config.publicDir + '/stylesheets/'))
+});
+// ---
 
-  var server = new WebpackDevServer(compiler, {
-    contentBase: webpackConfig.contentBase,
-    publicPath: webpackConfig.output.publicPath,
-    historyApiFallback: true,
-    noInfo: true,
-    hot: true,
-    stats: {
-      colors: true,
-      chunks: false
-    }
-  });
-  server.listen(port, hostname, function(err) {
-    if (err) throw new utils.PluginError('webpack:serve', err);
+// Autoprefixer.
+var prefix = require('gulp-autoprefixer');
 
-    utils.log("Starting", utils.colors.red("Webpack Dev Server"));
-    utils.log(
-      "Listening on",
-      utils.colors.red("http://" + hostname + ":" + port)
-    );
-  });
+gulp.task('autoprefixer', ['sass'], function() {
+  return gulp.src(Config.publicDir + '/stylesheets/*.css')
+    .pipe(prefix("last 2 versions", "ie 9"))
+    .pipe(gulp.dest(Config.publicDir + '/stylesheets/'))
 });
 
-// ESLint. I can't figure out where gulp-eslint is trying to find the .eslintignore
-// file, so I'm relying on gulp for exclusions for now. Excluding tests because
-// otherwise it screams about Jest/Jasmine magic.
-var eslint = require('gulp-eslint');
+// Server.
+var finalhandler = require('finalhandler');
+var http = require('http');
+var serveStatic = require('serve-static');
+var serve = serveStatic(Config.publicDir, { 'index': ['index.html'] });
+var server = http.createServer(function(req, res) {
+  var done = finalhandler(req, res);
+  serve(req, res, done);
+})
 
-gulp.task('eslint', function() {
-  return gulp.src(
-    [
-      Config.srcDir + '/**/*.js*',
-      '!**/tests/**'
-    ]
-  )
-  .pipe(eslint())
-  .pipe(eslint.format())
-});
+gulp.task('serve', function() {
+  server.listen(Config.port);
+})
+
 
 // Watch.
 gulp.task('watch', function() {
-  gulp.watch(Config.srcDir + '/**/*.js*',  ['eslint', 'jest']);
+  gulp.watch(Config.srcDir + '/**/*.js',  ['babel']);
+  gulp.watch(Config.srcDir + '/**/*.scss', ['autoprefixer']);
 });
+// ---
 
-gulp.task('build',    ['eslint', 'webpack:build']);
-gulp.task('default',  ['webpack:serve', 'build', 'watch']);
+gulp.task('build',    ['babel', 'autoprefixer']);
+gulp.task('default',  ['build', 'watch', 'serve']);
