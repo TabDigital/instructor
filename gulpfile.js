@@ -25,7 +25,7 @@ gulp.task('babel', function() {
 });
 
 // Release.
-gulp.task('release', function() {
+gulp.task('babel-release', function() {
   browserify({ entries: Config.srcDir + '/instructor/index.js', debug: false})
     .transform(babelify)
     .bundle()
@@ -42,6 +42,12 @@ gulp.task('autoprefixer', ['copy-styles'], function() {
     .pipe(gulp.dest(Config.publicDir))
 });
 
+gulp.task('autoprefixer-release', function() {
+  return gulp.src(Config.srcDir + '/instructor/index.css')
+    .pipe(prefix("last 2 versions", "ie 9"))
+    .pipe(gulp.dest(Config.distDir))
+})
+
 // Copy styles
 var concat = require('gulp-concat')
 
@@ -52,6 +58,7 @@ gulp.task('copy-styles', function() {
     ])
     .pipe(concat('demo.css'))
     .pipe(gulp.dest(Config.publicDir))
+    .pipe(gulp.dest(Config.distDir))
 });
 
 // Server.
@@ -78,3 +85,4 @@ gulp.task('watch', function() {
 
 gulp.task('build',    ['babel', 'autoprefixer']);
 gulp.task('default',  ['build', 'watch', 'serve']);
+gulp.task('release',  ['babel-release', 'autoprefixer-release']);
