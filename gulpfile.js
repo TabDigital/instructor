@@ -12,18 +12,26 @@ var Config = {
 };
 
 // YavaScripts.
-var sourcemaps = require('gulp-sourcemaps');
-var babel = require('gulp-babel');
-var concat = require('gulp-concat');
+var babelify = require('babelify');
+var browserify = require('browserify')
+var source = require('vinyl-source-stream');
 
-gulp.task('babel', function () {
-  return gulp.src('src/demo/index.js')
-    .pipe(sourcemaps.init())
-    .pipe(babel())
-    .pipe(concat('index.js'))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(Config.publicDir));
+gulp.task('babel', function() {
+  browserify({ entries: Config.srcDir + '/demo/index.js', debug: true})
+    .transform(babelify)
+    .bundle()
+    .pipe(source('index.js'))
+    .pipe(gulp.dest(Config.publicDir))
 });
+
+// Release.
+gulp.task('release', function() {
+  browserify({ entries: Config.srcDir + '/instructor/index.js', debug: false})
+    .transform(babelify)
+    .bundle()
+    .pipe(source('instructor.js'))
+    .pipe(gulp.dest(Config.distDir))
+})
 
 // Autoprefixer.
 var prefix = require('gulp-autoprefixer');

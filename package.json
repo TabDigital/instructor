@@ -3,17 +3,16 @@
     "build": "gulp build"
   },
   "devDependencies": {
-    "babel": "^5.3.0",
-    "babel-core": "^5.3.0",
     "babel-eslint": "^3.1.1",
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.4",
     "eslint": "^0.19.0",
     "finalhandler": "^0.3.6",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.3.1",
-    "gulp-babel": "^5.1.0",
     "gulp-concat": "^2.5.2",
     "gulp-eslint": "^0.9.0",
-    "gulp-sourcemaps": "^1.5.2",
-    "serve-static": "^1.9.3"
+    "serve-static": "^1.9.3",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
