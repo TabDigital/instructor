@@ -2,6 +2,8 @@
 
 It shows overlays on things on the page and pulls an explanation for them.
 
+[Download JS](https://raw.githubusercontent.com/TabDigital/instructor/master/dist/instructor.js) ⊙ [Download CSS](https://raw.githubusercontent.com/TabDigital/instructor/master/dist/instructor.css)
+
 ### Usage
 
 Instance a new instructor. Pass a root node and an instructions object (see
