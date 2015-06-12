@@ -2,25 +2,30 @@
 /* =================== */
 
 .main-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   width: 666px;
   margin: 99px auto 0;
   font-family: sans-serif;
 }
 
-.main-wrapper .box {
-  width: 100%;
-  height: 66px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
+.main-wrapper>* {
+  max-width: 40%;
+  padding: 11px;
 }
 
-.main-wrapper .box.green {
+.main-wrapper .news-section {
+  align-self: flex-start;
+}
+
+.main-wrapper .news-section img {
+  float: right;
+  max-width: 33%;
+}
+
+.main-wrapper .green-box {
+  align-self: flex-end;
   background: green;
-}
-
-.main-wrapper .box.blue {
-  background: blue;
+  color: white;
 }
