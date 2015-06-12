@@ -5,9 +5,10 @@ var gulp = require('gulp');
 
 // Build configurations.
 var Config = {
-  port:       '4567',
-  srcDir:     './src',
-  publicDir:  './public'
+  port: 4567,
+  srcDir: './src',
+  publicDir: './public',
+  distDir: './dist'
 };
 
 // YavaScripts.
@@ -16,30 +17,21 @@ var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 
 gulp.task('babel', function () {
-  return gulp.src('src/boot.js')
+  return gulp.src('src/demo/index.js')
     .pipe(sourcemaps.init())
     .pipe(babel())
-    .pipe(concat('bundle.js'))
+    .pipe(concat('index.js'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(Config.publicDir));
 });
 
-// SASS.
-var sass = require('gulp-ruby-sass');
-
-gulp.task('sass', function() {
-  return sass(Config.srcDir + '/stylesheets/index.scss')
-    .pipe(gulp.dest(Config.publicDir + '/stylesheets/'))
-});
-// ---
-
 // Autoprefixer.
 var prefix = require('gulp-autoprefixer');
 
-gulp.task('autoprefixer', ['sass'], function() {
-  return gulp.src(Config.publicDir + '/stylesheets/*.css')
+gulp.task('autoprefixer', function() {
+  return gulp.src(Config.publicDir + '/*.css')
     .pipe(prefix("last 2 versions", "ie 9"))
-    .pipe(gulp.dest(Config.publicDir + '/stylesheets/'))
+    .pipe(gulp.dest(Config.publicDir))
 });
 
 // Server.
@@ -60,7 +52,7 @@ gulp.task('serve', function() {
 // Watch.
 gulp.task('watch', function() {
   gulp.watch(Config.srcDir + '/**/*.js',  ['babel']);
-  gulp.watch(Config.srcDir + '/**/*.scss', ['autoprefixer']);
+  gulp.watch(Config.srcDir + '/**/*.css', ['autoprefixer']);
 });
 // ---
 
