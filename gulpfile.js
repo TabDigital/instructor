@@ -35,6 +35,7 @@ gulp.task('babel-release', function() {
 
 // Autoprefixer.
 var prefix = require('gulp-autoprefixer');
+var rename = require('gulp-rename');
 
 gulp.task('autoprefixer', ['copy-styles'], function() {
   return gulp.src(Config.publicDir + '/*.css')
@@ -45,6 +46,7 @@ gulp.task('autoprefixer', ['copy-styles'], function() {
 gulp.task('autoprefixer-release', function() {
   return gulp.src(Config.srcDir + '/instructor/index.css')
     .pipe(prefix("last 2 versions", "ie 9"))
+    .pipe(rename('instructor.css'))
     .pipe(gulp.dest(Config.distDir))
 })
 
