@@ -28,9 +28,21 @@ gulp.task('babel', function () {
 // Autoprefixer.
 var prefix = require('gulp-autoprefixer');
 
-gulp.task('autoprefixer', function() {
+gulp.task('autoprefixer', ['copy-styles'], function() {
   return gulp.src(Config.publicDir + '/*.css')
     .pipe(prefix("last 2 versions", "ie 9"))
+    .pipe(gulp.dest(Config.publicDir))
+});
+
+// Copy styles
+var concat = require('gulp-concat')
+
+gulp.task('copy-styles', function() {
+  return gulp.src([
+      Config.srcDir + '/instructor/index.css',
+      Config.srcDir + '/demo/index.css'
+    ])
+    .pipe(concat('demo.css'))
     .pipe(gulp.dest(Config.publicDir))
 });
 
