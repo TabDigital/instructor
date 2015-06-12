@@ -18,6 +18,7 @@
   opacity: .001;
   color: white;
   overflow: hidden;
+  font-family: 'Gill Sans', 'Calibri', sans-serif;
 }
 
 .instructable-overlay.visible {
@@ -39,6 +40,9 @@
 
 .instructable-overlay .instructable-wrapper {
   position: absolute;
+  padding: 22px;
+  background: #f3f3f3;
+  color: #8d8d8d;
 }
 
 .instructable-overlay .instructable-wrapper.top,
@@ -79,8 +83,26 @@
 }
 
 .instructable-overlay .instructable-wrapper .menu {
-  margin: 11px;
+  margin: 22px 0 0;
   padding: 0;
+}
+
+.instructable-overlay .instructable-wrapper button {
+  transition: color .35s ease-out;
+  border: 2px solid white;
+  font-size: 12px;
+  padding: 11px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid #c0c0c0;
+  color: inherit;
+  outline: none;
+  cursor: pointer;
+}
+
+.instructable-overlay .instructable-wrapper button:hover {
+  background: #c0c0c0;
+  color: black;
 }
 
 .instructable-overlay .instructable-wrapper .body-wrapper {
