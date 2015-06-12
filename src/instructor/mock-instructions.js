@@ -8,8 +8,12 @@ export default {
     title: 'Look, a green box',
     body: 'An ok green box'
   },
-  'blue-box': {
-    title: 'And here is another box',
-    body: 'Almost very different than the previous one'
+  'cat-yawning': {
+    title: 'A cat yawning',
+    body: 'Cats yawn. Like other animals do too.'
+  },
+  'news-section': {
+    title: 'News section',
+    body: 'A section, with some news showing.'
   }
 }
