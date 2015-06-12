@@ -23,20 +23,20 @@ function applyOffsetsToStyle(element1, element2, direction) {
 
   switch (direction) {
     case 'top':
-      element1.style.top = element2.offsetTop;
-      element1.style.left = element2.offsetLeft + element2.offsetWidth / 2;
+      element1.style.top = '' + element2.offsetTop + 'px';
+      element1.style.left = '' + (element2.offsetLeft + element2.offsetWidth / 2) + 'px';
       break;
     case 'right':
-      element1.style.top = element2.offsetTop;
-      element1.style.left = element2.offsetLeft + element2.offsetWidth;
+      element1.style.top = '' + element2.offsetTop + 'px';
+      element1.style.left = '' + (element2.offsetLeft + element2.offsetWidth) + 'px';
       break;
     case 'bottom':
-      element1.style.top = element2.offsetTop + element2.offsetHeight;
-      element1.style.left = element2.offsetLeft + element2.offsetWidth / 2;
+      element1.style.top = '' + (element2.offsetTop + element2.offsetHeight) + 'px';
+      element1.style.left = '' + (element2.offsetLeft + element2.offsetWidth / 2) + 'px';
       break;
     case 'left':
-      element1.style.top = element2.offsetTop;
-      element1.style.left = element2.offsetLeft;
+      element1.style.top = '' + element2.offsetTop + 'px';
+      element1.style.left = '' + element2.offsetLeft + 'px';
       break;
   }
 }
