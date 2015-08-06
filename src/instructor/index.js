@@ -110,3 +110,5 @@ export default class Instructor {
     }
   }
 }
+
+if (typeof exports !== 'undefined') window.Instructor = Instructor
