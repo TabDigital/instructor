@@ -184,6 +184,8 @@ var Instructor = (function () {
 })();
 
 exports['default'] = Instructor;
+
+if (typeof exports !== 'undefined') window.Instructor = Instructor;
 module.exports = exports['default'];
 
 },{"./fit-element":1}]},{},[2]);
